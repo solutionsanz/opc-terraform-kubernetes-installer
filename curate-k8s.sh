@@ -12,7 +12,7 @@ if [ "$#" -ne 5 ]; then
     echo " Illegal number of parameters."
     echo " Mark as true or false for the following components that you wish to deploy"
     echo " Order: [MonitoringDashboards Fn SocksShopDemo CheesesDemo ServiceMeshDemo]"
-    echo " Example: [true false true true true]"
+    echo " Example: ./curate-k8s.sh true false true true true"
     echo "****************************************"
     exit 1
     
