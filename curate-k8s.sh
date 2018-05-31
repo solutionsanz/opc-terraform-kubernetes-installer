@@ -24,6 +24,8 @@ SocksShopDemo=$3
 CheesesDemo=$4
 ServiceMeshDemo=$5
 
+wait=10s
+
 #######################################################################
 #################### Setting up Cloud Native Technologies
 
@@ -31,37 +33,42 @@ echo "MGT :: Remote-Exec :: Configure Environments ..."
     #dashboard, monitoring, & metrics..
         if [ $1 = "true" ]; then
             echo "ENV-1 :: Updating K8s Dashboard, Monitoring & Metrics ..."
-            ./script/mgt/env/envDashMonMet.sh
+            chmod 755 ./script/mgt/env/envDashMonMet.sh && ./script/mgt/env/envDashMonMet.sh
         echo "Waiting for kube-system pods (dasboard & dependencies) to be up and running ..."
-        kubectl::get_pod kube-system
+        #kubectl::get_pod kube-system
+        sleep $wait
         fi
     #microservices..
         if [ $SocksShopDemo = "true" ]; then
             echo "ENV-2 :: Installing Microservices Environment ..."
-            ./script/mgt/env/envMicroSvc.sh
+            chmod 755 ./script/mgt/env/envMicroSvc.sh && ./script/mgt/env/envMicroSvc.sh
         echo "Waiting for sock-shop pods (microservices application) to be up and running ..."
-        kubectl::get_pod sock-shop
+        #kubectl::get_pod sock-shop
+        sleep $wait
         fi
     #ingress controller..
         if [ $CheesesDemo = "true" ]; then
             echo "ENV-3 :: Installing Traefik Ingress Controller ..."
-            ./script/mgt/env/envIngress.sh
+            chmod 755 ./script/mgt/env/envIngress.sh && ./script/mgt/env/envIngress.sh
         echo "Waiting for kube-system pods to be up and running ..."
-        kubectl::get_pod kube-system
+        #kubectl::get_pod kube-system
+        sleep $wait
         fi
     #fn..
         if [ $Fn = "true" ]; then
             echo "ENV-4 :: Installing Fn ..."
-            ./script/mgt/env/envFn.sh
+            chmod 755 ./script/mgt/env/envFn.sh && ./script/mgt/env/envFn.sh
         echo "Waiting for default pods to be up and running ..."
-        kubectl::get_pod default
+        #kubectl::get_pod default
+        sleep $wait
         fi
     #service mesh..
         if [ $ServiceMeshDemo = "true" ]; then
             echo "ENV-5 :: Installing Service Mesh Control Plane ..."
-            ./script/mgt/env/envSvcMesh.sh
+            chmod 755 ./script/mgt/env/envSvcMesh.sh && ./script/mgt/env/envSvcMesh.sh
         echo "Waiting for istio-system & default pods to be up and running ..."
-        kubectl::get_pod istio-system
-        kubectl::get_pod default
+        #kubectl::get_pod istio-system
+        #kubectl::get_pod default
+        sleep $wait
         fi
 echo "MGT :: Remote-Exec :: Configure Environments ... :: Done ..."
