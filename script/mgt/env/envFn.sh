@@ -20,17 +20,20 @@
             done
     }
   #helm..
-  kubectl apply -f /tmp/mgt/env/envFn/tiller-rbac.yaml >>/tmp/noise.out                                                            
-  chmod +x /tmp/mgt/env/envFn/get_helm.sh >>/tmp/noise.out
-  timeout 60 /tmp/mgt/env/envFn/get_helm.sh >>/tmp/noise.out
+  kubectl apply -f ./script/mgt/env/envFn/tiller-rbac.yaml >>/tmp/noise.out                                                            
+  chmod +x ./script/mgt/env/envFn/get_helm.sh >>/tmp/noise.out
+  timeout 60 ./script/mgt/env/envFn/get_helm.sh >>/tmp/noise.out
   sleep 60
   kubectl::get_pod kube-system
   helm init --service-account tiller >>/tmp/noise.out
   helm init --client-only >>/tmp/noise.out
   kubectl::get_pod kube-system
   #fn..
-  git clone --quiet https://github.com/fnproject/fn-helm.git && cd fn-helm
-  cp /tmp/mgt/env/envFn/values.yaml fn/ >>/tmp/noise.out
+  git clone --quiet https://github.com/fnproject/fn-helm.git /tmp/cncf/fn-helm
+  cp ./script/mgt/env/envFn/values.yaml /tmp/cncf/fn-helm/fn/ >>/tmp/noise.out
+
+  cd /tmp/cncf/fn-helm
+  
   helm dep build fn >>/tmp/noise.out
   helm install --name rel-01 fn >>/tmp/noise.out
   

@@ -24,7 +24,7 @@ SocksShopDemo=$3
 CheesesDemo=$4
 ServiceMeshDemo=$5
 
-wait=10s
+wait=5s
 
 #######################################################################
 #################### Setting up Cloud Native Technologies
@@ -34,11 +34,12 @@ rm -rf /tmp/cncf
 
 echo "MGT :: Remote-Exec :: Configure Environments ..."
     #dashboard, monitoring, & metrics..
-        if [ $1 = "true" ]; then
+        if [ $MonitoringDashboards = "true" ]; then
             echo "ENV-1 :: Updating K8s Dashboard, Monitoring & Metrics ..."
             chmod 755 ./script/mgt/env/envDashMonMet.sh && ./script/mgt/env/envDashMonMet.sh
         echo "Waiting for kube-system pods (dasboard & dependencies) to be up and running ..."
         #kubectl::get_pod kube-system
+        sleep $wait
         fi
     #microservices..
         if [ $SocksShopDemo = "true" ]; then
