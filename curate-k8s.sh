@@ -11,7 +11,7 @@ if [ "$#" -ne 5 ]; then
     echo "**************************************** Error: "
     echo " Illegal number of parameters."
     echo " Mark as true or false for the following components that you wish to deploy"
-    echo " Order: [MonitoringDashboards Fn SocksShopDemo CheesesDemo ServiceMeshDemo]"
+    echo " Order: [MonitoringDashboards SocksShopDemo CheesesDemo ServiceMeshDemo]"
     echo " Example: ./curate-k8s.sh true false true true true"
     echo "****************************************"
     exit 1
@@ -19,10 +19,10 @@ if [ "$#" -ne 5 ]; then
 fi
 
 MonitoringDashboards=$1
-Fn=$2
-SocksShopDemo=$3
-CheesesDemo=$4
-ServiceMeshDemo=$5
+#Fn=$2
+SocksShopDemo=$2
+CheesesDemo=$3
+ServiceMeshDemo=$4
 
 wait=5s
 
