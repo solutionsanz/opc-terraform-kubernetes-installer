@@ -30,7 +30,7 @@ wait=10s
 #################### Setting up Cloud Native Technologies
 
 # Reseting temp folder:
-rm -rf /tmp/cncf && mkdir /tmp/cncf
+rm -rf /tmp/cncf
 
 echo "MGT :: Remote-Exec :: Configure Environments ..."
     #dashboard, monitoring, & metrics..
