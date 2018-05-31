@@ -23,12 +23,16 @@ else
   # TODO we should check more/complain if not likely to work, etc...
   OSEXT="linux"
 fi
+
+#######CRI: Changing directory for consistency purposes:
+cd $HOME
+
 URL="https://github.com/istio/istio/releases/download/${ISTIO_VERSION}/istio-${ISTIO_VERSION}-${OSEXT}.tar.gz"
 echo "Downloading $NAME from $URL ..."
 curl -s -L "$URL" | tar xz
 # TODO: change this so the version is in the tgz/directory name (users trying multiple versions)
-echo "Downloaded into $NAME:"
-ls $NAME
-BINDIR="$(cd $NAME/bin; pwd)"
+echo "Downloaded into ${HOME}/$NAME:"
+ls "${HOME}/$NAME"
+BINDIR="$(cd ${HOME}/$NAME/bin; pwd)"
 echo "Add $BINDIR to your path; e.g copy paste in your shell and/or ~/.profile:"
 echo "export PATH=\"\$PATH:$BINDIR\""
